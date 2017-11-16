@@ -5,9 +5,11 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script src="javascripts/app.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   </head>
-  <body ng-app="comment" ng-controller="MainCtrl">
+  <body ng-app="emailer" ng-controller="MainCtrl">
     <div class="container-flex">
 	  <h1>Email Scheduler</h1>
 	  </div>
@@ -15,19 +17,19 @@
 		  <div class="row">
 			  <div class="col-md-8">
 		  <form ng-submit="addMessage()">
-				Email Address: <input type="text" ng-model="address" name="address"><br>
-				Subject Line: <input type="text" ng-model="subject-line" name="subject"><br>
-				Message: <br><textarea name="message" ng-model="message-text" rows="5" cols="50"></textarea><br>
-				Date:  <input name="date" ng-model="date-time" type="datetime-local"><br>
+				Email Address: <input type="text" ng-model="formContent.address" name="address"><br>
+				Subject Line: <input type="text" ng-model="formContent.subject" name="subject"><br>
+				Message: <br><textarea name="message" ng-model="formContent.messageText" rows="5" cols="50"></textarea><br>
+				Date:  <input name="date" ng-model="formContent.dateTime" type="datetime-local"><br>
 				<button name="submit" ng-click="addMessage()">Submit</button>
 		  </form>
 			  
 			  </div>
 			  <div class="col-md-4">
 			  <h3>Current Messages in Queue</h3>
-				  <div ng-repeat="message in messages" id="message-queue">
-				  {{message.title}} - To be Sent: {{message.time}}
-				  
+				  <div ng-repeat="message in messages" >
+				  {{message.title}} - To be Sent: {{message.time}} 
+ 				  
 				  
 				  </div>
 			  </div>  

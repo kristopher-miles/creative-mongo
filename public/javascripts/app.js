@@ -1,18 +1,14 @@
-angular.module('comment', [])
+angular.module('emailer', [])
 .controller('MainCtrl', [
-  '$scope',
-  function($scope){
-    $scope.test = 'Hello world!';
+  '$scope','$http',
+   function($scope,$http){
+	$scope.messages = []
+   
+	$scope.addMessage = function() {
+	  $scope.messages.push({title:$scope.formContent.subject,destination:$scope.formContent.address,message:$scope.formContent.messageText,date:$scope.formContent.dateTime});
+      	  $scope.address='';
+      	
+     	};
+
   }
 ]);
-
-$scope.messages = [];
-
-$scope.addMessage = function() {
-      
-      $scope.messages.push({title:$scope.subject-line,destination:$scope.address,message:$scope.message-text,date:$scope.date-time});
-      $scope.address='';
-
-	$scope.subject-line='';
-      $scope.message-text='';
-    };
