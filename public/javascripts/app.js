@@ -26,13 +26,9 @@ angular.module('emailer', [])
 		date:$scope.formContent.dateTime});
 	
 
-	 	$scope.formContent.address='';
-		$scope.formContent.subject = '';
-		$scope.formContent.messageText ='';
-		
+	  $scope.address='';
       	
      	};
 
   }
 ]);
-

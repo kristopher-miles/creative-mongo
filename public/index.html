@@ -23,13 +23,13 @@
 				Subject Line: <input type="text" ng-model="formContent.subject" name="subject"><br>
 				Message: <br><textarea name="message" ng-model="formContent.messageText" rows="5" cols="50"></textarea><br>
 				Date:  <input name="date" ng-model="formContent.dateTime" type="datetime-local"><br>
-				<button name="submit" >Submit</button>
+				<button name="submit" ng-click="addMessage()">Submit</button>
 		  </form>
 			  
 			  </div>
 			  <div class="col-md-4">
 			  <h3>Current Messages in Queue</h3>
-				  <div ng-repeat="message in messages" >
+				  <div ng-repeat="message in messages">
 				  {{message.title}} - To be Sent: {{message.date}} 
  				  
 				  
