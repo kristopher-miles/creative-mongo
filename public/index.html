@@ -18,19 +18,20 @@
 	  <div class="container">
 		  <div class="row">
 			  <div class="col-md-8">
+                  <h3>Send an Email!</h3>
 		  <form ng-submit="addMessage()">
 				Email Address: <input type="text" ng-model="formContent.address" name="address"><br>
 				Subject Line: <input type="text" ng-model="formContent.subject" name="subject"><br>
 				Message: <br><textarea name="message" ng-model="formContent.messageText" rows="5" cols="50"></textarea><br>
 				Date:  <input name="date" ng-model="formContent.dateTime" type="datetime-local"><br>
-				<button name="submit" ng-click="addMessage()">Submit</button>
+				<button name="submit">Submit</button>
 		  </form>
 			  
 			  </div>
 			  <div class="col-md-4">
 			  <h3>Current Messages in Queue</h3>
 				  <div ng-repeat="message in messages">
-				  {{message.title}} - To be Sent: {{message.date}} 
+				  {{message.subject}} - To be Sent: {{message.date}} 
  				  
 				  
 				  </div>

@@ -24,9 +24,10 @@ angular.module('emailer', [])
 		destination:$scope.formContent.address,
 		message:$scope.formContent.messageText,
 		date:$scope.formContent.dateTime});
-	
-
-	  $scope.address='';
+        
+        $scope.formContent.address='';
+ 		$scope.formContent.subject = '';
+ 		$scope.formContent.messageText ='';
       	
      	};
 

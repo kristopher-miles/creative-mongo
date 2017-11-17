@@ -23,48 +23,48 @@ router.get('/messages', function(req, res, next) {
 });
 
 
-//var mailman = function(message){
-//	var datestr = message.date;
-//	var month = datestr.slice(5,6);
-//	var day = datestr.slice(8,9);
-//	var min = datestr.slice(14,15);
-//	var hr = datestr.slice(11,12);
-//
-//	var j = schedule.scheduleJob(' min hr day month * ' , function(){
-//	
-//		//email crap
-//
-//		nodemailer.createTestAccount((err,account) => {
-//			let transporter = nodemailer.createTransport({
-//				host: 'smtp.ethereal.email',
-//				port: 3000,
-//				secure: false,
-//				auth: {
-//					user: ppwufo6hj5gr3jrj,
-//					pass: jbtP4ZA1Vw8hvYsG6m
-//				}	
-//		});
-//
-//		let mailOptions = {
-//			from: '"260 Group" <cs260tester@gmail.com>',
-//			to: message.destination,
-//			subject: message.subject,
-//			html: message.message,
-//		};
-//
-//		transporter.sendMail(mailOptions, (error,info) => {
-//			if (error) {
-//				return console.log(errors);
-//			}	
-//			console.log('Message sent: %s', info.messageId);
-//			console.log('Preview URL: %s',
-//		nodemailer.getTestMessageUrl(info));
-//
-//	   });
-//	});
-  // 
+var mailman = function(message){
+	var datestr = message.date;
+	var month = datestr.slice(5,6);
+	var day = datestr.slice(8,9);
+	var min = datestr.slice(14,15);
+	var hr = datestr.slice(11,12);
 
-//};
+	var j = schedule.scheduleJob(' min hr day month * ' , function(){
+	
+		//email crap
+
+		nodemailer.createTestAccount((err,account) => {
+			let transporter = nodemailer.createTransport({
+				host: 'smtp.ethereal.email',
+				port: 3000,
+				secure: false,
+				auth: {
+					user: ppwufo6hj5gr3jrj,
+					pass: jbtP4ZA1Vw8hvYsG6m
+				}	
+		});
+
+		let mailOptions = {
+			from: '"260 Group" <cs260tester@gmail.com>',
+			to: message.destination,
+			subject: message.subject,
+			html: message.message,
+		};
+
+		transporter.sendMail(mailOptions, (error,info) => {
+			if (error) {
+				return console.log(errors);
+			}	
+			console.log('Message sent: %s', info.messageId);
+			console.log('Preview URL: %s',
+		nodemailer.getTestMessageUrl(info));
+
+	   });
+	});
+   
+
+};
 	
 router.post('/messages', function(req, res, next) {
   var email = new Email(req.body);
@@ -72,7 +72,7 @@ router.post('/messages', function(req, res, next) {
     if(err){ return next(err); }
    //This is where the magic happens.
 	
-//	mailman(message);
+	//mailman(message);
     res.json(email);
   });
 });
