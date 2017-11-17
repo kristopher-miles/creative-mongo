@@ -30,6 +30,13 @@ angular.module('emailer', [])
  		$scope.formContent.messageText ='';
       	
      	};
+        $scope.getAll = function() {
+                return $http.get('/messages').success(function(data){
+                        angular.copy(data, $scope.messages);
+                });
+        };
+        $scope.getAll();
+       
 
   }
 ]);
