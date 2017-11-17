@@ -5,6 +5,16 @@ var schedule = require ('node-schedule');
 var emailer = require ('nodemailer');
 var Email = mongoose.model('Email');
 
+router.param('message', function(req,res,next,id){
+	var query = Message.findById(id);
+	query.exec(function(err,comment){
+		if (err) {return next(err);}
+		if (!message) {return next(new Error('cant find message'));}
+		req.message = message;
+		return next();
+	});	
+});
+
 router.get('/messages', function(req, res, next) {
   Email.find(function(err, messages){
     if(err){ return next(err); }

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var EmailSchema = new mongoose.Schema({
   subject: String,
-  destination: mongoose.SchemaTypes.Email,
+  destination: String,
   messageText: String,
   date: Date,
 });
