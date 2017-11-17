@@ -6,8 +6,17 @@ angular.module('emailer', [])
 
          $scope.messages = []
 	$scope.formContent = {};
-         
+       
 
+	var date_string = ""+new Date().toJSON().split("T")[0]+"T";
+	var hours = "";
+	if(new Date().getHours()<10){
+		hours="0";
+	}
+	hours += new Date().toLocaleTimeString().split(" ")[0];
+	date_string +=hours;
+	console.log(date_string); 
+	  $scope.formContent.dateTime = date_string;	
 
 	 $scope.create = function(message) {
 

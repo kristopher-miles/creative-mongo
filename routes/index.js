@@ -2,7 +2,7 @@
 var router = express.Router();
 var mongoose = require('mongoose');
 var schedule = require ('node-schedule');
-var emailer = require ('nodemailer');
+var nodemailer = require ('nodemailer');
 var Email = mongoose.model('Email');
 
 router.param('message', function(req,res,next,id){
@@ -24,14 +24,15 @@ router.get('/messages', function(req, res, next) {
 
 
 var mailman = function(message){
-	var datestr = message.date;
-	var month = datestr.slice(5,6);
-	var day = datestr.slice(8,9);
-	var min = datestr.slice(14,15);
-	var hr = datestr.slice(11,12);
-
-	var j = schedule.scheduleJob(' min hr day month * ' , function(){
 	
+	var trueDate = message.date;
+
+	trueDate.setHours(trueDate.getHours()+7);
+	
+	//message.date.setHours( message.date.getHours()+7 );
+	console.log("Adjusted hours: "+trueDate.getHours());
+	var j = schedule.scheduleJob(trueDate , function(){
+	console.log("Time to send a message!");
 		//email crap
 
 		nodemailer.createTestAccount((err,account) => {
@@ -40,8 +41,8 @@ var mailman = function(message){
 				port: 3000,
 				secure: false,
 				auth: {
-					user: ppwufo6hj5gr3jrj,
-					pass: jbtP4ZA1Vw8hvYsG6m
+					user: 'ppwufo6hj5gr3jrj',
+					pass: 'jbtP4ZA1Vw8hvYsG6m'
 				}	
 		});
 
@@ -54,13 +55,17 @@ var mailman = function(message){
 
 		transporter.sendMail(mailOptions, (error,info) => {
 			if (error) {
-				return console.log(errors);
+				return console.log(error);
 			}	
 			console.log('Message sent: %s', info.messageId);
 			console.log('Preview URL: %s',
 		nodemailer.getTestMessageUrl(info));
 
 	   });
+
+		//Now we need to delete the email from the database, now that it has been sent.
+		message.remove();
+		console.log("Should be done emailing, removed from the database.");
 	});
    
 
@@ -69,12 +74,14 @@ var mailman = function(message){
 };
 	
 router.post('/messages', function(req, res, next) {
-  var email = new Email(req.body);
+  console.log("recieved new email to save.");
+  console.log(JSON.stringify(req.body));
+	var email = new Email(req.body);
   email.save(function(err, comment){
     if(err){ return next(err); }
    //This is where the magic happens.
 	
-	//mailman(message);
+    mailman(email);
     res.json(email);
   });
 });
