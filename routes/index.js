@@ -1,7 +1,7 @@
-var express = require('express');
+ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var schedule = require ('node-schedule');
+//var schedule = require ('node-schedule');
 var emailer = require ('nodemailer');
 var Email = mongoose.model('Email');
 
