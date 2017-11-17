@@ -10,11 +10,15 @@ angular.module('emailer', [])
 
 	var date_string = ""+new Date().toJSON().split("T")[0]+"T";
 	var hours = "";
+	var working_date = new Date().setSeconds(0);
 	if(new Date().getHours()<10){
 		hours="0";
 	}
 	hours += new Date().toLocaleTimeString().split(" ")[0];
-	date_string +=hours;
+	var output = hours.split(":")[0];
+	output+=":"+hours.split(":")[1];
+
+	date_string +=output;
 	console.log(date_string); 
 	  $scope.formContent.dateTime = date_string;	
 

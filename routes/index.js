@@ -24,6 +24,10 @@ router.get('/messages', function(req, res, next) {
 
 
 var mailman = function(message){
+/*You're probably wondering what happened here. As it turns out, the server we were using didn't work because it was
+designed for development enviorments. I had to scour the internet until I found a way to send mail for real (instead of eating it the way that old server did). 
+I found a way, but to make it work I had to set it up with my own personal email address.
+I don't think that should matter. In any case, this works now.*/
 	
 	var trueDate = message.date;
 
@@ -37,20 +41,20 @@ var mailman = function(message){
 
 		nodemailer.createTestAccount((err,account) => {
 			let transporter = nodemailer.createTransport({
-				host: 'smtp.ethereal.email',
-				port: 3000,
-				secure: false,
+				host: 'in-v3.mailjet.com',
+				port: 587,
+				secure:false,
 				auth: {
-					user: 'ppwufo6hj5gr3jrj',
-					pass: 'jbtP4ZA1Vw8hvYsG6m'
+					user: 'aef2ac7972a72a94cbc80b965e51c5f6',
+					pass: '308fc2cb6ad3b3a1380b323bf7bb0bd6'
 				}	
 		});
 
 		let mailOptions = {
-			from: '"260 Group" <cs260tester@gmail.com>',
+			from: '"260 Email Scheduler" <kristophermiles@gmail.com>',
 			to: message.destination,
-			subject: message.subject,
-			html: message.message,
+			subject: message.title,
+			text: message.message,
 		};
 
 		transporter.sendMail(mailOptions, (error,info) => {
