@@ -31,7 +31,7 @@ I don't think that should matter. In any case, this works now.*/
 	
 	var trueDate = message.date;
 
-	trueDate.setHours(trueDate.getHours()+7);
+	trueDate.setUTCHours(trueDate.getUTCHours()+7);
 	
 	//message.date.setHours( message.date.getHours()+7 );
 	console.log("Adjusted hours: "+trueDate.getHours());

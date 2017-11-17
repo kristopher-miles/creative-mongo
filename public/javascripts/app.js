@@ -11,14 +11,18 @@ angular.module('emailer', [])
 	var date_string = ""+new Date().toJSON().split("T")[0]+"T";
 	var hours = "";
 	var working_date = new Date().setSeconds(0);
-	if(new Date().getHours()<10){
-		hours="0";
-	}
+	
 	hours += new Date().toLocaleTimeString().split(" ")[0];
 	var output = hours.split(":")[0];
 	output+=":"+hours.split(":")[1];
-
+	
+	if(output.length<5){
+		console.log("appending time string.");
+		date_string+="0";
+	}
 	date_string +=output;
+	
+	
 	console.log(date_string); 
 	  $scope.formContent.dateTime = date_string;	
 
@@ -51,6 +55,7 @@ angular.module('emailer', [])
       	
      	};
         $scope.getAll = function() {
+		console.log("Updating message queue.");
                 return $http.get('/messages').success(function(data){
                         angular.copy(data, $scope.messages);
                 });
@@ -58,5 +63,6 @@ angular.module('emailer', [])
         $scope.getAll();
        
 
+   
   }
 ]);
