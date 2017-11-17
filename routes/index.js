@@ -64,6 +64,8 @@ var mailman = function(message){
 	});
    
 
+});
+    
 };
 	
 router.post('/messages', function(req, res, next) {
