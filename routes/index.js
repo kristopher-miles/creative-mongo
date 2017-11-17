@@ -80,6 +80,17 @@ router.post('/messages', function(req, res, next) {
 });
 
 
+router.get('/wipe', function(req, res, next) {
+  Email.remove({}, function(err) { 
+   console.log('collection removed') 
+});
+    
+    Email.find(function(err, comments){
+    if(err){ return next(err); }
+    res.json(comments);
+  });
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });

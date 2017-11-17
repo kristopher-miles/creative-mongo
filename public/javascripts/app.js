@@ -11,6 +11,7 @@ angular.module('emailer', [])
 
 	 $scope.create = function(message) {
    		 return $http.post('/messages', message).success(function(data){
+             console.log("pushed message subject: "+message.subject);
     			  $scope.messages.push(data);
    		 });
  	 };	
