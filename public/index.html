@@ -2,44 +2,49 @@
 <html lang="en">
   <head>
     <title>Email Scheduler Creative Project</title>
-
-
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
     <script src="javascripts/app.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+      <link rel="stylesheet" href="stylesheets/style.css">
   </head>
   <body ng-app="emailer" ng-controller="MainCtrl">
-    <div class="container-flex">
-	  <h1>Email Scheduler</h1>
-	  </div>
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">Email Scheduler</h1>
+          <p>Have an important message you'd like to send when you won't have access to a computer? Have our server send it when you need.</p>
+        </div>
+      </div>
 	  <div class="container">
 		  <div class="row">
-			  <div class="col-md-8">
-                  <h3>Send an Email!</h3>
+			  <div class="col-md-7">
+                  <h3>Send an Email</h3>
 		  <form ng-submit="addMessage()">
-				Email Address: <input type="text" ng-model="formContent.address" name="address"><br>
-				Subject Line: <input type="text" ng-model="formContent.subject" name="subject"><br>
-				Message: <br><textarea name="message" ng-model="formContent.messageText" rows="5" cols="50"></textarea><br>
-				Date:  <input name="date" ng-model="formContent.dateTime" type="datetime-local"><br>
-				<button name="submit">Submit</button>
+				<p>Email Address: <input type="text" ng-model="formContent.address" name="address"><span></span>
+				Subject Line: <input type="text" ng-model="formContent.subject" name="subject"></p>
+				<p>Message: <br><textarea name="message" ng-model="formContent.messageText" rows="5" cols="80"></textarea></p>
+				Date:  <input name="date" ng-model="formContent.dateTime" type="datetime-local">
+				<button class="btn btn-lg btn-secondary" name="submit">Submit</button>
 		  </form>
 			  
 			  </div>
-			  <div class="col-md-4">
-			  <h3>Current Messages in Queue</h3>
-				  <div ng-repeat="message in messages">
+			  <div class="col-md-5">
+			  <h3>Messages in Queue</h3>
+                  <ul class="list-group">
+                    <li ng-repeat="message in messages" class="list-group-item">{{message.title}} - {{message.date}}</li>
+                  
+                  </ul>
+				<!--  <div ng-repeat="message in messages">
 				  {{message.title}} - To be Sent: {{message.date}} 
  				  
 				  
-				  </div>
+				  </div> -->
 			  </div>  
 		  </div>  
 	  </div>
+      
 
-    
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
