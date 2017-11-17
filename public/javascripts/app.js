@@ -5,11 +5,14 @@ angular.module('emailer', [])
 	
 
          $scope.messages = []
-   
-
+	$scope.formContent = {};
+         
 
 
 	 $scope.create = function(message) {
+
+		console.log("entered create");
+		console.log("Created:"+JSON.stringify(message));
    		 return $http.post('/messages', message).success(function(data){
              console.log("pushed message subject: "+message.subject);
     			  $scope.messages.push(data);
@@ -20,11 +23,14 @@ angular.module('emailer', [])
 
 	if ($scope.formContent === ''){return;}
 	console.log('In addMessage');
-	$scope.create({
-		title:$scope.formContent.subject,
-		destination:$scope.formContent.address,
-		message:$scope.formContent.messageText,
-		date:$scope.formContent.dateTime});
+	console.log("Subject is: "+$scope.formContent.subject);
+	var message = {
+                title:$scope.formContent.subject,
+                destination:$scope.formContent.address,
+                message:$scope.formContent.messageText,
+                date:$scope.formContent.dateTime};
+
+	$scope.create(message);
         
         $scope.formContent.address='';
  		$scope.formContent.subject = '';
